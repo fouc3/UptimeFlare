@@ -57,7 +57,7 @@ const workerConfig: WorkerConfig = {
       name: '9wmc.xyz',
       method: 'TCP_PING',
       target: '9wmc.xyz:25565',
-      checkProxy: 'worker://nam',
+      checkProxy: 'worker://wnam',
       tooltip: '通过DO实现的美国ping欢乐村',
     },
     {
@@ -65,7 +65,7 @@ const workerConfig: WorkerConfig = {
       name: 'happycraft.cc',
       method: 'TCP_PING',
       target: 'happycraft.cc:25565',
-      checkProxy: 'worker://nam',
+      checkProxy: 'worker://wnam',
       tooltip: '通过DO实现的美国ping欢乐村',
     },
     {
@@ -73,7 +73,7 @@ const workerConfig: WorkerConfig = {
       name: '1.happycraft.cc',
       method: 'TCP_PING',
       target: '1.happycraft.cc:25565',
-      checkProxy: 'worker://nam',
+      checkProxy: 'worker://wnam',
       tooltip: '通过DO实现的美国ping欢乐村',
     },
 
