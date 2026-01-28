@@ -14,7 +14,7 @@ const pageConfig: PageConfig = {
   group: {
     '中国区域 (GlobalPing)': ['cn_ping_9wmc', 'cn_ping_happycraft', 'cn_ping_1_happycraft'],
     '北美区域 (Worker Proxy)': ['us_ping_9wmc', 'us_ping_happycraft', 'us_ping_1_happycraft'],
-    'API 状态检查': ['api_9wmc', 'api_happycraft', 'api_1_happycraft'],
+    '使用API': ['api_9wmc', 'api_happycraft', 'api_1_happycraft'],
   }
 }
 
@@ -29,7 +29,7 @@ const workerConfig: WorkerConfig = {
       name: '[CN] 9wmc.xyz',
       method: 'TCP_PING',
       target: '9wmc.xyz:25565',
-      checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab@chine',
+      checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab?magic=China',
       tooltip: 'GlobalPing - China Node',
     },
     {
@@ -37,7 +37,7 @@ const workerConfig: WorkerConfig = {
       name: '[CN] happycraft.cc',
       method: 'TCP_PING',
       target: 'happycraft.cc:25565',
-      checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab@chine',
+      checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab?magic=China',
       tooltip: 'GlobalPing - China Node',
     },
     {
@@ -45,7 +45,7 @@ const workerConfig: WorkerConfig = {
       name: '[CN] 1.happycraft.cc',
       method: 'TCP_PING',
       target: '1.happycraft.cc:25565',
-      checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab@chine',
+      checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab?magic=China',
       tooltip: 'GlobalPing - China Node',
     },
 
