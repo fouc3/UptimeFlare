@@ -37,6 +37,26 @@ const Worker = {
       checkResult[result.id] = result
     }
 
+    // Retry logic: Retry failed checks once
+    const failedMonitorIds = Object.keys(checkResult).filter((id) => !checkResult[id].status.up)
+    if (failedMonitorIds.length > 0) {
+      console.log(`Retrying ${failedMonitorIds.length} failed monitors after 1s delay...`)
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      const retryQueue: Promise<CheckResult>[] = []
+      for (const id of failedMonitorIds) {
+        const monitor = workerConfig.monitors.find((m) => m.id === id)
+        if (monitor) {
+          retryQueue.push(limit(() => doMonitor(monitor, workerLocation, env)))
+        }
+      }
+
+      for (const result of await Promise.all(retryQueue)) {
+        console.log(`Retry result for ${result.id}: up=${result.status.up}`)
+        checkResult[result.id] = result
+      }
+    }
+
     // Update each monitor's state based on check results
     for (const monitor of workerConfig.monitors) {
       console.log(`Processing monitor result: ${monitor.name} (${monitor.id})`)
@@ -75,7 +95,7 @@ const Worker = {
               workerConfig.notification?.gracePeriod === undefined ||
               // only when we have sent a notification for DOWN status, we will send a notification for UP status (within 30 seconds of possible drift)
               currentTimeSecond - lastIncident.start[0] >=
-                (workerConfig.notification.gracePeriod + 1) * 60 - 30
+              (workerConfig.notification.gracePeriod + 1) * 60 - 30
             ) {
               await formatAndNotify(monitor, true, lastIncident.start[0], currentTimeSecond, 'OK')
             } else {
@@ -127,14 +147,14 @@ const Worker = {
               (workerConfig.notification?.gracePeriod === undefined ||
                 // have sent a notification for DOWN status
                 currentTimeSecond - currentIncident.start[0] >=
-                  (workerConfig.notification.gracePeriod + 1) * 60 - 30)) ||
+                (workerConfig.notification.gracePeriod + 1) * 60 - 30)) ||
             // grace period is set AND...
             (workerConfig.notification?.gracePeriod !== undefined &&
               // grace period is met
               currentTimeSecond - currentIncident.start[0] >=
-                workerConfig.notification.gracePeriod * 60 - 30 &&
+              workerConfig.notification.gracePeriod * 60 - 30 &&
               currentTimeSecond - currentIncident.start[0] <
-                workerConfig.notification.gracePeriod * 60 + 30)
+              workerConfig.notification.gracePeriod * 60 + 30)
           ) {
             if (
               currentIncident.start[0] !== currentTimeSecond &&
@@ -155,10 +175,8 @@ const Worker = {
           } else {
             console.log(
               `Grace period (${workerConfig.notification
-                ?.gracePeriod}m) not met or no change (currently down for ${
-                currentTimeSecond - currentIncident.start[0]
-              }s, changed ${monitorStatusChanged}), skipping webhook DOWN notification for ${
-                monitor.name
+                ?.gracePeriod}m) not met or no change (currently down for ${currentTimeSecond - currentIncident.start[0]
+              }s, changed ${monitorStatusChanged}), skipping webhook DOWN notification for ${monitor.name
               }`
             )
           }
@@ -239,7 +257,7 @@ const Worker = {
     if (
       statusChanged ||
       currentTimeSecond - state.data.lastUpdate >=
-        (workerConfig.kvWriteCooldownMinutes ?? 3) * 60 - 10 // Allow for 10 seconds of clock drift
+      (workerConfig.kvWriteCooldownMinutes ?? 3) * 60 - 10 // Allow for 10 seconds of clock drift
     ) {
       console.log('Updating state...')
       state.data.lastUpdate = currentTimeSecond
