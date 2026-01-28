@@ -26,27 +26,27 @@ const workerConfig: WorkerConfig = {
     // ------------------------------------------------
     {
       id: 'cn_ping_9wmc',
-      name: '[CN] 9wmc.xyz',
+      name: '9wmc.xyz',
       method: 'TCP_PING',
       target: '9wmc.xyz:25565',
       checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab?magic=China',
-      tooltip: 'GlobalPing - China Node',
+      tooltip: '通过GlobalPing实现的中国ping欢乐村',
     },
     {
       id: 'cn_ping_happycraft',
-      name: '[CN] happycraft.cc',
+      name: 'happycraft.cc',
       method: 'TCP_PING',
       target: 'happycraft.cc:25565',
       checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab?magic=China',
-      tooltip: 'GlobalPing - China Node',
+      tooltip: '通过GlobalPing实现的中国ping欢乐村',
     },
     {
       id: 'cn_ping_1_happycraft',
-      name: '[CN] 1.happycraft.cc',
+      name: '1.happycraft.cc',
       method: 'TCP_PING',
       target: '1.happycraft.cc:25565',
       checkProxy: 'globalping://4ypg7r2glgabqgfx3cy2w3ljy5h6ezab?magic=China',
-      tooltip: 'GlobalPing - China Node',
+      tooltip: '通过GlobalPing实现的中国ping欢乐村',
     },
 
     // ------------------------------------------------
@@ -54,27 +54,27 @@ const workerConfig: WorkerConfig = {
     // ------------------------------------------------
     {
       id: 'us_ping_9wmc',
-      name: '[US] 9wmc.xyz',
+      name: '9wmc.xyz',
       method: 'TCP_PING',
       target: '9wmc.xyz:25565',
       checkProxy: 'worker://nam',
-      tooltip: 'Worker Proxy - North America',
+      tooltip: '通过DO实现的美国ping欢乐村',
     },
     {
       id: 'us_ping_happycraft',
-      name: '[US] happycraft.cc',
+      name: 'happycraft.cc',
       method: 'TCP_PING',
       target: 'happycraft.cc:25565',
       checkProxy: 'worker://nam',
-      tooltip: 'Worker Proxy - North America',
+      tooltip: '通过DO实现的美国ping欢乐村',
     },
     {
       id: 'us_ping_1_happycraft',
-      name: '[US] 1.happycraft.cc',
+      name: '1.happycraft.cc',
       method: 'TCP_PING',
       target: '1.happycraft.cc:25565',
       checkProxy: 'worker://nam',
-      tooltip: 'Worker Proxy - North America',
+      tooltip: '通过DO实现的美国ping欢乐村',
     },
 
     // ------------------------------------------------
@@ -82,11 +82,11 @@ const workerConfig: WorkerConfig = {
     // ------------------------------------------------
     {
       id: 'api_9wmc',
-      name: '[API] 9wmc.xyz Status',
+      name: '9wmc.xyz',
       method: 'GET',
       target: 'https://uapis.cn/api/v1/game/minecraft/serverstatus?server=9wmc.xyz:25565',
       responseKeyword: '"online":true', // Match JSON 'online': true
-      tooltip: 'UAPIs Minecraft Server Status',
+      tooltip: '通过UAPI进行状态侦测',
     },
     {
       id: 'api_happycraft',
@@ -94,7 +94,7 @@ const workerConfig: WorkerConfig = {
       method: 'GET',
       target: 'https://uapis.cn/api/v1/game/minecraft/serverstatus?server=happycraft.cc:25565',
       responseKeyword: '"online":true',
-      tooltip: 'UAPIs Minecraft Server Status',
+      tooltip: '通过UAPI进行状态侦测',
     },
     {
       id: 'api_1_happycraft',
@@ -102,7 +102,7 @@ const workerConfig: WorkerConfig = {
       method: 'GET',
       target: 'https://uapis.cn/api/v1/game/minecraft/serverstatus?server=1.happycraft.cc:25565',
       responseKeyword: '"online":true',
-      tooltip: 'UAPIs Minecraft Server Status',
+      tooltip: '通过UAPI进行状态侦测',
     },
   ],
   // [Optional] Notification settings
