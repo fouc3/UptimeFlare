@@ -8,9 +8,10 @@ binding = "UPTIMEFLARE_D1"
 database_name = "huanlecun-uptimeflare"
 database_id = "9d2a5373-b6be-4103-8adc-c9efe88456f2"
 
-[[durable_objects]]
-binding = "REMOTE_CHECKER_DO"
-class_name = "RemoteChecker"
+[durable_objects]
+bindings = [
+  { name = "REMOTE_CHECKER_DO", class_name = "RemoteChecker" }
+]
 
 [[migrations]]
 tag = "v1"
